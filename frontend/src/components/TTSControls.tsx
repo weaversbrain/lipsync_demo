@@ -39,6 +39,8 @@ const languageNames = {
 
 // ElevenLabs 사전 정의된 목소리들
 const elevenLabsVoices = [
+  { nickname: "Hope", voiceId: "zGjIP4SZlMnY9m93k97r" },
+  { nickname: "Ivy", voiceId: "i4CzbCVWoqvD0P1QJCUL" },
   { nickname: "Jon", voiceId: "MFZUKuGQUsGJPQjTS4wC" },
   { nickname: "Cinnamon", voiceId: "kNie5n4lYl7TrvqBZ4iG" },
   { nickname: "Flint", voiceId: "qAZH0aMXY8tw1QufPN0D" },
@@ -56,7 +58,12 @@ const exampleSentences = [
   "우리 함께 'coding'을 해봅시다.",
 ];
 
-function TTSControls({ onVisemeChange, onAudioEnd, theme, version = 1 }: TTSControlsProps) {
+function TTSControls({
+  onVisemeChange,
+  onAudioEnd,
+  theme,
+  version = 1,
+}: TTSControlsProps) {
   // 기본 테마 (파란색)
   const defaultTheme = {
     titleColors: "from-blue-600 to-purple-600",
@@ -335,7 +342,7 @@ function TTSControls({ onVisemeChange, onAudioEnd, theme, version = 1 }: TTSCont
                           e.target.value as "preset" | "custom"
                         )
                       }
-                        className={`${
+                      className={`${
                         currentTheme.focusColor === "blue-500"
                           ? "text-blue-500 focus:ring-blue-500"
                           : currentTheme.focusColor === "pink-500"
@@ -358,7 +365,7 @@ function TTSControls({ onVisemeChange, onAudioEnd, theme, version = 1 }: TTSCont
                           e.target.value as "preset" | "custom"
                         )
                       }
-                        className={`${
+                      className={`${
                         currentTheme.focusColor === "blue-500"
                           ? "text-blue-500 focus:ring-blue-500"
                           : currentTheme.focusColor === "pink-500"
