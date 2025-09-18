@@ -6,7 +6,7 @@ import TTSControls from "./TTSControls";
 // 캐릭터 정보
 const characters = [
   { id: "thanos", name: "Thanos", path: "/thanos" },
-  { id: "moco", name: "Moco", path: "/moco" },
+  { id: "pico", name: "Pico", path: "/pico" },
   { id: "eggni", name: "Eggni", path: "/eggni" },
 ];
 
