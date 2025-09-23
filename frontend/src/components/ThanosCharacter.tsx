@@ -80,26 +80,28 @@ function ThanosCharacter() {
   };
 
   return (
-    <div className="flex w-full h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-      {/* 왼쪽 - Rive 애니메이션 */}
-      <div className="w-1/2 p-8 flex flex-col items-center justify-center">
-        <RiveComponent />
+    <div className="flex flex-col lg:flex-row w-full min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      {/* 상단/왼쪽 - Rive 애니메이션 */}
+      <div className="w-full lg:w-1/2 px-2 py-1 pb-0 lg:p-8 flex flex-col items-center justify-center min-h-[25vh] lg:min-h-screen">
+        <div className="w-full h-full max-w-xs lg:max-w-none min-h-[180px] lg:min-h-[400px]">
+          <RiveComponent className="w-96 h-96 lg:w-full lg:h-full" />
+        </div>
       </div>
 
-      {/* 오른쪽 - TTS 입력 */}
-      <div className="w-1/2 p-8 flex flex-col">
-        <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 h-full border border-white/20">
+      {/* 하단/오른쪽 - TTS 입력 */}
+      <div className="w-full lg:w-1/2 p-2 pt-0 lg:p-8 flex flex-col">
+        <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-4 lg:p-8 h-full border border-white/20">
           {/* 캐릭터 선택 */}
-          <div className="mb-6">
-            <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <div className="mb-4 lg:mb-6">
+            <h3 className="text-xl lg:text-2xl font-bold mb-2 lg:mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Character Selection
             </h3>
-            <div className="flex gap-2">
+            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
               {characters.map((character) => (
                 <button
                   key={character.id}
                   onClick={() => navigate(character.path)}
-                  className={`px-4 py-2 rounded-xl font-medium shadow-md transition-all duration-200 ${
+                  className={`px-3 lg:px-4 py-2 rounded-xl font-medium shadow-md transition-all duration-200 whitespace-nowrap text-sm lg:text-base ${
                     character.id === "thanos"
                       ? "bg-blue-500 text-white shadow-lg"
                       : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -111,13 +113,13 @@ function ThanosCharacter() {
             </div>
           </div>
 
-          <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h3 className="text-xl lg:text-2xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Thanos Controls
           </h3>
 
-          <div className="flex gap-x-3 mb-8 flex-wrap">
+          <div className="flex gap-2 lg:gap-x-3 mb-6 lg:mb-8 flex-wrap">
             <button
-              className="bg-blue-500 hover:bg-blue-600 rounded-xl text-white px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer"
+              className="bg-blue-500 hover:bg-blue-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
               onClick={(_e: any) => {
                 if (!visemeInput) return;
                 if (visemeInput.value === 0) {
@@ -130,7 +132,7 @@ function ThanosCharacter() {
               Viseme Toggle
             </button>
             <button
-              className="bg-blue-500 hover:bg-blue-600 rounded-xl text-white px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer"
+              className="bg-blue-500 hover:bg-blue-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
               onClick={(_e: any) => {
                 if (!blinkInput) return;
                 blinkInput.value = true;
@@ -142,7 +144,7 @@ function ThanosCharacter() {
               Blink
             </button>
             <button
-              className="bg-blue-500 hover:bg-blue-600 rounded-xl text-white px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer"
+              className="bg-blue-500 hover:bg-blue-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
               onClick={(_e: any) => {
                 if (headDownInput) {
                   console.log("head down set true");
@@ -158,7 +160,7 @@ function ThanosCharacter() {
               Head Move
             </button>
             <button
-              className="bg-blue-500 hover:bg-blue-600 rounded-xl text-white px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer"
+              className="bg-blue-500 hover:bg-blue-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
               onClick={(_e: any) => {
                 if (jokeInput) {
                   jokeInput.value = !jokeInput.value;
