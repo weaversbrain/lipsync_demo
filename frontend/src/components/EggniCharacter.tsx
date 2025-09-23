@@ -5,9 +5,10 @@ import { useStateMachineInput } from "@rive-app/react-canvas";
 
 // 캐릭터 정보
 const characters = [
-  { id: "thanos", name: "Thanos", path: "/thanos" },
+  { id: "pico-v2", name: "Pico V2", path: "/pico-v2" },
   { id: "pico", name: "Pico", path: "/pico" },
   { id: "eggni", name: "Eggni", path: "/eggni" },
+  { id: "thanos", name: "Thanos", path: "/thanos" },
 ];
 
 function EggniCharacter() {
