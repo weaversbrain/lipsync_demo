@@ -103,10 +103,10 @@ function PicoV2Character() {
             <button
               className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
               onClick={(_e: any) => {
-                handleActionIdChange(0);
+                handleActionIdChange(3);
               }}
             >
-              기본 상태
+              감탄하기
             </button>
           </div>
 
