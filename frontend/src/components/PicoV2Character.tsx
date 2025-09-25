@@ -108,6 +108,14 @@ function PicoV2Character() {
             >
               감탄하기
             </button>
+            <button
+              className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
+              onClick={(_e: any) => {
+                handleActionIdChange(3);
+              }}
+            >
+              어디갔지
+            </button>
           </div>
 
           {/* TTS 미구현 안내 */}
