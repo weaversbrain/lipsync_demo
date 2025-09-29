@@ -1,6 +1,7 @@
 import { useRive } from "@rive-app/react-canvas";
 import { useNavigate } from "react-router-dom";
 import { useStateMachineInput } from "@rive-app/react-canvas";
+import { useEffect } from "react";
 import TTSControls from "./TTSControls";
 
 // 캐릭터 정보
@@ -14,8 +15,46 @@ const characters = [
 function PicoV2Character() {
   const navigate = useNavigate();
 
+  // 캐시 초기화 로직
+  useEffect(() => {
+    // 브라우저 캐시 강제 새로고침
+    const clearCache = () => {
+      // Service Worker 캐시 삭제
+      if ("caches" in window) {
+        caches.keys().then((names) => {
+          names.forEach((name) => {
+            caches.delete(name);
+          });
+        });
+      }
+
+      // 로컬 스토리지 및 세션 스토리지 정리 (선택적)
+      // localStorage.clear();
+      // sessionStorage.clear();
+
+      // 브라우저 캐시 헤더 설정
+      const timestamp = new Date().getTime();
+      const riveSrc = `/viseme_animation/pico_v2.riv?v=${timestamp}`;
+
+      // Rive 파일 프리로드로 캐시 우회
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.href = riveSrc;
+      link.as = "fetch";
+      link.crossOrigin = "anonymous";
+      document.head.appendChild(link);
+
+      // 정리
+      setTimeout(() => {
+        document.head.removeChild(link);
+      }, 1000);
+    };
+
+    clearCache();
+  }, []);
+
   const { rive, RiveComponent } = useRive({
-    src: "/viseme_animation/pico_v2.riv",
+    src: `/viseme_animation/pico_v2.riv?v=${Date.now()}`,
     stateMachines: ["movement", "lipsync"],
     autoplay: true,
   });
