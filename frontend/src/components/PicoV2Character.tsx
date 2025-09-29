@@ -90,7 +90,7 @@ function PicoV2Character() {
     }
     setTimeout(() => {
       actionWithMouthIdInput.value = 0;
-    }, playTime + 250);
+    }, playTime + 100);
   };
 
   const handleActionWithoutMouthIdChange = (
@@ -114,7 +114,7 @@ function PicoV2Character() {
     }
     setTimeout(() => {
       actionWithoutMouthIdInput.value = 0;
-    }, playTime + 250);
+    }, playTime + 100);
   };
 
   const handleVisemeChange = (visemeId: number) => {
