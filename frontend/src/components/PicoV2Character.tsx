@@ -62,7 +62,7 @@ function PicoV2Character() {
     rive,
     "movement",
     "actionWithMouthId",
-    100
+    0
   );
   const actionWithoutMouthIdInput = useStateMachineInput(
     rive,
@@ -71,48 +71,67 @@ function PicoV2Character() {
     0
   );
 
-  const handleActionWithMouthIdChange = (actionId: number) => {
-    if (actionWithMouthIdInput) {
-      if (actionWithMouthIdInput.value === actionId) {
-        actionWithMouthIdInput.value = 0;
-        setTimeout(() => {
-          actionWithMouthIdInput.value = actionId;
-        }, 100);
-      } else {
-        actionWithMouthIdInput.value = actionId;
-      }
+  const handleActionWithMouthIdChange = (
+    actionId: number,
+    playTime: number
+  ) => {
+    if (!actionWithMouthIdInput || !actionWithoutMouthIdInput) {
+      return;
     }
+    if (actionWithMouthIdInput.value === actionId) {
+      actionWithMouthIdInput.value = 0;
+      setTimeout(() => {
+        actionWithMouthIdInput.value = actionId;
+      }, 100);
+    } else if (
+      actionWithMouthIdInput.value !== 0 ||
+      actionWithoutMouthIdInput.value !== 0
+    ) {
+      return;
+    } else {
+      actionWithMouthIdInput.value = actionId;
+    }
+    setTimeout(() => {
+      actionWithMouthIdInput.value = 0;
+    }, playTime + 250);
   };
 
-  const handleActionWithoutMouthIdChange = (actionId: number) => {
-    if (actionWithoutMouthIdInput) {
-      if (actionWithoutMouthIdInput.value === actionId) {
-        actionWithoutMouthIdInput.value = 0;
-        setTimeout(() => {
-          actionWithoutMouthIdInput.value = actionId;
-        }, 100);
-      } else {
-        actionWithoutMouthIdInput.value = actionId;
-      }
+  const handleActionWithoutMouthIdChange = (
+    actionId: number,
+    playTime: number
+  ) => {
+    if (!actionWithoutMouthIdInput || !actionWithMouthIdInput) {
+      return;
     }
+    if (actionWithoutMouthIdInput.value === actionId) {
+      actionWithoutMouthIdInput.value = 0;
+      setTimeout(() => {
+        actionWithoutMouthIdInput.value = actionId;
+      }, 100);
+    } else if (
+      actionWithoutMouthIdInput.value !== 0 ||
+      (actionWithMouthIdInput.value !== 0 &&
+        typeof actionWithMouthIdInput.value === "number" &&
+        actionWithMouthIdInput.value < 100)
+    ) {
+      return;
+    } else {
+      actionWithoutMouthIdInput.value = actionId;
+    }
+    setTimeout(() => {
+      actionWithoutMouthIdInput.value = 0;
+    }, playTime + 250);
   };
 
   const handleVisemeChange = (visemeId: number) => {
-    // if (visemeInput) {
-    //   visemeInput.value = visemeId;
-    //   console.log(visemeId);
-    // }
     if (actionWithMouthIdInput) {
       actionWithMouthIdInput.value = visemeId + 100;
     }
   };
 
   const handleAudioEnd = () => {
-    // if (visemeInput) {
-    //   visemeInput.value = -1;
-    // }
     if (actionWithMouthIdInput) {
-      actionWithMouthIdInput.value = 100;
+      actionWithMouthIdInput.value = 0;
     }
   };
 
@@ -164,7 +183,7 @@ function PicoV2Character() {
               <button
                 className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
                 onClick={(_e: any) => {
-                  handleActionWithoutMouthIdChange(1);
+                  handleActionWithoutMouthIdChange(1, 1000);
                 }}
               >
                 안경 올리기
@@ -182,7 +201,7 @@ function PicoV2Character() {
               <button
                 className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
                 onClick={(_e: any) => {
-                  handleActionWithMouthIdChange(1);
+                  handleActionWithMouthIdChange(1, 1000);
                 }}
               >
                 끄덕이기
@@ -190,7 +209,7 @@ function PicoV2Character() {
               <button
                 className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
                 onClick={(_e: any) => {
-                  handleActionWithMouthIdChange(2);
+                  handleActionWithMouthIdChange(2, 1350);
                 }}
               >
                 감탄하기
@@ -198,7 +217,7 @@ function PicoV2Character() {
               <button
                 className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
                 onClick={(_e: any) => {
-                  handleActionWithMouthIdChange(3);
+                  handleActionWithMouthIdChange(3, 1350);
                 }}
               >
                 어디갔지
@@ -206,7 +225,7 @@ function PicoV2Character() {
               <button
                 className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
                 onClick={(_e: any) => {
-                  handleActionWithMouthIdChange(4);
+                  handleActionWithMouthIdChange(4, 1350);
                 }}
               >
                 긁긁
@@ -214,7 +233,7 @@ function PicoV2Character() {
               <button
                 className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
                 onClick={(_e: any) => {
-                  handleActionWithMouthIdChange(5);
+                  handleActionWithMouthIdChange(5, 1000);
                 }}
               >
                 코찔찔
