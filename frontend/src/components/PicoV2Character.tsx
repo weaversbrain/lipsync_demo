@@ -79,10 +79,7 @@ function PicoV2Character() {
       return;
     }
     if (actionWithMouthIdInput.value === actionId) {
-      actionWithMouthIdInput.value = 0;
-      setTimeout(() => {
-        actionWithMouthIdInput.value = actionId;
-      }, 100);
+      return;
     } else if (
       actionWithMouthIdInput.value !== 0 ||
       actionWithoutMouthIdInput.value !== 0
@@ -104,10 +101,7 @@ function PicoV2Character() {
       return;
     }
     if (actionWithoutMouthIdInput.value === actionId) {
-      actionWithoutMouthIdInput.value = 0;
-      setTimeout(() => {
-        actionWithoutMouthIdInput.value = actionId;
-      }, 100);
+      return;
     } else if (
       actionWithoutMouthIdInput.value !== 0 ||
       (actionWithMouthIdInput.value !== 0 &&
