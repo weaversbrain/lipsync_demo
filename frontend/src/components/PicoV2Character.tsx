@@ -16,34 +16,64 @@ function PicoV2Character() {
 
   const { rive, RiveComponent } = useRive({
     src: "/viseme_animation/pico_v2.riv",
-    stateMachines: ["movement"],
+    stateMachines: ["movement", "lipsync"],
     autoplay: true,
   });
-  const actionIdInput = useStateMachineInput(rive, "movement", "actionId", 0);
-  const visemeInput = useStateMachineInput(rive, "movement", "viseme", 0);
+  const actionWithMouthIdInput = useStateMachineInput(
+    rive,
+    "movement",
+    "actionWithMouthId",
+    100
+  );
+  const actionWithoutMouthIdInput = useStateMachineInput(
+    rive,
+    "movement",
+    "actionWithoutMouthId",
+    0
+  );
 
-  const handleActionIdChange = (actionId: number) => {
-    if (actionIdInput) {
-      if (actionIdInput.value === actionId) {
-        actionIdInput.value = 0;
+  const handleActionWithMouthIdChange = (actionId: number) => {
+    if (actionWithMouthIdInput) {
+      if (actionWithMouthIdInput.value === actionId) {
+        actionWithMouthIdInput.value = 0;
         setTimeout(() => {
-          actionIdInput.value = actionId;
+          actionWithMouthIdInput.value = actionId;
         }, 100);
       } else {
-        actionIdInput.value = actionId;
+        actionWithMouthIdInput.value = actionId;
+      }
+    }
+  };
+
+  const handleActionWithoutMouthIdChange = (actionId: number) => {
+    if (actionWithoutMouthIdInput) {
+      if (actionWithoutMouthIdInput.value === actionId) {
+        actionWithoutMouthIdInput.value = 0;
+        setTimeout(() => {
+          actionWithoutMouthIdInput.value = actionId;
+        }, 100);
+      } else {
+        actionWithoutMouthIdInput.value = actionId;
       }
     }
   };
 
   const handleVisemeChange = (visemeId: number) => {
-    if (visemeInput) {
-      visemeInput.value = visemeId;
+    // if (visemeInput) {
+    //   visemeInput.value = visemeId;
+    //   console.log(visemeId);
+    // }
+    if (actionWithMouthIdInput) {
+      actionWithMouthIdInput.value = visemeId + 100;
     }
   };
 
   const handleAudioEnd = () => {
-    if (visemeInput) {
-      visemeInput.value = 0;
+    // if (visemeInput) {
+    //   visemeInput.value = -1;
+    // }
+    if (actionWithMouthIdInput) {
+      actionWithMouthIdInput.value = 100;
     }
   };
 
@@ -85,39 +115,72 @@ function PicoV2Character() {
             Pico V2 Controls
           </h3>
 
-          <div className="flex gap-2 lg:gap-x-3 mb-6 lg:mb-8 flex-wrap">
-            <button
-              className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
-              onClick={(_e: any) => {
-                handleActionIdChange(1);
-              }}
-            >
-              끄덕이기
-            </button>
-            <button
-              className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
-              onClick={(_e: any) => {
-                handleActionIdChange(2);
-              }}
-            >
-              안경 올리기
-            </button>
-            <button
-              className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
-              onClick={(_e: any) => {
-                handleActionIdChange(3);
-              }}
-            >
-              감탄하기
-            </button>
-            <button
-              className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
-              onClick={(_e: any) => {
-                handleActionIdChange(4);
-              }}
-            >
-              어디갔지
-            </button>
+          {/* 입 움직임이 없는 액션 */}
+          <div className="mb-6 lg:mb-8">
+            <h4 className="text-sm font-medium mb-2 text-purple-700 flex items-center">
+              <span className="mr-1">🤫</span>입 움직임 없는 액션 (립싱크와 동시
+              재생 가능)
+            </h4>
+            <div className="flex gap-2 lg:gap-x-3 mb-2 flex-wrap">
+              <button
+                className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
+                onClick={(_e: any) => {
+                  handleActionWithoutMouthIdChange(1);
+                }}
+              >
+                안경 올리기
+              </button>
+            </div>
+          </div>
+
+          {/* 입 움직임이 있는 액션 */}
+          <div className="mb-3">
+            <h4 className="text-sm font-medium mb-2 text-pink-700 flex items-center">
+              <span className="mr-1">💬</span>입 움직임이 있는 액션 (립싱크와
+              동시 재생 불가)
+            </h4>
+            <div className="flex gap-2 lg:gap-x-3 mb-2 flex-wrap">
+              <button
+                className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
+                onClick={(_e: any) => {
+                  handleActionWithMouthIdChange(1);
+                }}
+              >
+                끄덕이기
+              </button>
+              <button
+                className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
+                onClick={(_e: any) => {
+                  handleActionWithMouthIdChange(2);
+                }}
+              >
+                감탄하기
+              </button>
+              <button
+                className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
+                onClick={(_e: any) => {
+                  handleActionWithMouthIdChange(3);
+                }}
+              >
+                어디갔지
+              </button>
+              <button
+                className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
+                onClick={(_e: any) => {
+                  handleActionWithMouthIdChange(4);
+                }}
+              >
+                긁긁
+              </button>
+              <button
+                className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
+                onClick={(_e: any) => {
+                  handleActionWithMouthIdChange(5);
+                }}
+              >
+                코찔찔
+              </button>
+            </div>
           </div>
 
           <TTSControls
