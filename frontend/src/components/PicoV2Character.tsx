@@ -96,7 +96,7 @@ function PicoV2Character() {
     }
     setTimeout(() => {
       actionWithMouthIdInput.value = 0;
-    }, playTime + 200);
+    }, playTime);
   };
 
   const handleActionWithoutMouthIdChange = (
@@ -120,7 +120,7 @@ function PicoV2Character() {
     }
     setTimeout(() => {
       actionWithoutMouthIdInput.value = 0;
-    }, playTime + 200);
+    }, playTime);
   };
 
   const handleVisemeChange = (visemeId: number) => {
@@ -188,6 +188,22 @@ function PicoV2Character() {
               >
                 안경 올리기
               </button>
+              <button
+                className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
+                onClick={(_e: any) => {
+                  handleActionWithoutMouthIdChange(2, 1350);
+                }}
+              >
+                댄스
+              </button>
+              <button
+                className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
+                onClick={(_e: any) => {
+                  handleActionWithoutMouthIdChange(3, 1000);
+                }}
+              >
+                뱃살 주물
+              </button>
             </div>
           </div>
 
@@ -209,7 +225,7 @@ function PicoV2Character() {
               <button
                 className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
                 onClick={(_e: any) => {
-                  handleActionWithMouthIdChange(2, 1350);
+                  handleActionWithMouthIdChange(2, 1600);
                 }}
               >
                 감탄하기
@@ -217,7 +233,7 @@ function PicoV2Character() {
               <button
                 className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
                 onClick={(_e: any) => {
-                  handleActionWithMouthIdChange(3, 1350);
+                  handleActionWithMouthIdChange(3, 1600);
                 }}
               >
                 어디갔지
@@ -225,7 +241,7 @@ function PicoV2Character() {
               <button
                 className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
                 onClick={(_e: any) => {
-                  handleActionWithMouthIdChange(4, 1350);
+                  handleActionWithMouthIdChange(4, 1600);
                 }}
               >
                 긁긁
@@ -237,6 +253,14 @@ function PicoV2Character() {
                 }}
               >
                 코찔찔
+              </button>
+              <button
+                className="bg-pink-500 hover:bg-pink-600 rounded-xl text-white px-3 lg:px-4 py-2 font-medium shadow-lg transition-all duration-200 hover:cursor-pointer text-sm lg:text-base"
+                onClick={(_e: any) => {
+                  handleActionWithMouthIdChange(6, 3000);
+                }}
+              >
+                립밤
               </button>
             </div>
           </div>
